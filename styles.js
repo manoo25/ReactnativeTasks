@@ -73,7 +73,7 @@ export const styles = ({
     fontSize: 15,
   },
   todosContainer: {
-    marginTop: 10,
+    marginTop: 50,
   },
   doneTodo: {
     textDecorationLine: "line-through",
