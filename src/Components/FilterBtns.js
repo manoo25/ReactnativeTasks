@@ -1,17 +1,25 @@
 import { View,TouchableOpacity,Text } from "react-native";
 import { styles } from "../../Styles/styles.js";
+import { useState } from "react";
 
-function FilterBtns() {
+function FilterBtns({filter}) {
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  function handelFilter(state) {
+    setActiveFilter(state);
+    filter(state);
+
+  }
     return ( 
          <View style={styles.filterContainer}>
-                  <TouchableOpacity style={styles.filterBtn}>
-                    <Text style={styles.filterText}>All</Text>
+                  <TouchableOpacity onPress={()=>handelFilter('all')} style={activeFilter=='all'? styles.activeFilterBtn:styles.filterBtn}>
+                    <Text style={ activeFilter=='all'? styles.activeFilterText:styles.filterText}>All</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.filterBtn}>
-                    <Text style={styles.filterText}>Active</Text>
+                  <TouchableOpacity onPress={()=>handelFilter('active')} style={activeFilter=='active'? styles.activeFilterBtn:styles.filterBtn}>
+                    <Text style={ activeFilter=='active'? styles.activeFilterText:styles.filterText}>Active</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.filterBtn}>
-                    <Text style={styles.filterText}>Completed</Text>
+                  <TouchableOpacity onPress={()=>handelFilter('completed')} style={activeFilter=='completed'? styles.activeFilterBtn:styles.filterBtn}>
+                    <Text style={ activeFilter=='completed'? styles.activeFilterText:styles.filterText}>Completed</Text>
                   </TouchableOpacity>
         
                   

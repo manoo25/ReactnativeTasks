@@ -1,12 +1,14 @@
 
-import { View,Text,FlatList } from "react-native";
+import { View,Text,FlatList, TouchableOpacity } from "react-native";
 import { styles } from "../../Styles/styles.js";
 import { FontAwesome5 } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from "@react-navigation/native";
+import { PATHS } from "../routes/router.js";
 
-function TodoList({TasksList}) {
+function TodoList({TasksList,Check,DeleteTask}) {
 
-
+const {navigate} = useNavigation();
 
     return ( 
       
@@ -15,25 +17,30 @@ function TodoList({TasksList}) {
        
           data={TasksList}
           renderItem={({ item }) => (
-            <View style={{ 
+            <TouchableOpacity  onPress={() => navigate(PATHS.DETAILS,  {item:item,check:Check,delete:DeleteTask})}>
+<View style={{ 
               flex: 1,
               justifyContent:'space-between',
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: '#fff',padding: 10, borderRadius: 10, marginTop:10}}>
+              backgroundColor: '#fff',padding: 10, borderRadius: 10, marginTop:10}}
+             
+              
+              >
               <View>
-                <Text>Task Name : {item.title}</Text>
-              <Text>Description : {item.description}</Text>
+                <Text style={{fontSize:20,fontWeight:600}}>{item.title}</Text>
+          
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center',gap:'10'}}>
-                 <FontAwesome5 name="trash" size={20} color="red" />
-                 {TasksList.completed ? (
-                   <AntDesign  name="checkcircle" size={20} color="green" />
+                 <FontAwesome5 onPress={()=>DeleteTask(item.id)} name="trash" size={20} color="red" />
+                 {item.completed ? (
+                   <AntDesign onPress={()=>Check(item.id)}  name="checkcircle" size={20} color="green" />
                  ) : (
-                   <AntDesign  name="checkcircleo" size={20} color="gray" />
+                   <AntDesign onPress={()=>Check(item.id)}  name="checkcircleo" size={20} color="gray" />
                  )}
               </View>
             </View>
+            </TouchableOpacity>
           )}
           keyExtractor={item => item.id}
         />
