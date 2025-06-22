@@ -13,11 +13,21 @@ function Router() {
     return (  
       <NavigationContainer>
 <MyStack.Navigator screenOptions={{
- 
 headerShown: false,
     }}>
     <MyStack.Screen name={PATHS.Home} component={Home}></MyStack.Screen>
-    <MyStack.Screen name={PATHS.DETAILS} component={Details}></MyStack.Screen>
+    <MyStack.Screen name={PATHS.DETAILS} component={Details}
+    options={
+        {
+            headerShown:true,
+             headerTitle:'',
+            headerBackTitleVisible:true,
+            headerBackTitle:'Back',
+            headerTintColor:'green',
+           
+        }
+    }
+    ></MyStack.Screen>
 </MyStack.Navigator>
       </NavigationContainer>
     );
