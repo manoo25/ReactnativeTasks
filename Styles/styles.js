@@ -60,6 +60,7 @@ export const styles = ({
   dividerLine: {
    flex:1,
    paddingTop:20,
+   paddingBottom:20,
    alignItems: "center",
     width: "90%",
     backgroundColor: "lightblue",

@@ -34,6 +34,7 @@ function StackScreen() {
           headerTintColor: 'green',
         }}
       />
+      <Stack.Screen name={PATHS.AllTodos} component={AllTodos} />
     </Stack.Navigator>
   );
 }
@@ -51,7 +52,7 @@ function Router() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === "Home") {
+            if (route.name === PATHS.Home) {
               iconName = focused ? 'home' : 'home-outline';
             } 
             else if (route.name === PATHS.AllTodos) {
@@ -62,8 +63,8 @@ function Router() {
           },
         })}
       >
-        <Tab.Screen name="Home" component={StackScreen} />
-        <Tab.Screen name={PATHS.AllTodos} component={AllTodos} />
+        <Tab.Screen name={PATHS.Home} component={StackScreen} />
+        <Tab.Screen name={PATHS.AllTodos} component={StackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

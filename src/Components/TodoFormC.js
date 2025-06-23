@@ -1,12 +1,16 @@
 import {  Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from "../../Styles/styles.js";
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo } from '../Redux/Slices/todos.slice.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function TodoForm({addTasks}) {
+function TodoForm() {
 
 const[taskTitle, setTaskTitle] = useState('');
 const[taskDescription, setTaskDescription] = useState('');
-
+const todos = useSelector((state) => state.todos.list);
+const dispatch=useDispatch();
 const TaskObj={
     id: Math.random().toString(),
     title: taskTitle,
@@ -22,9 +26,13 @@ const handleSubmit = () => {
     }
     else{
        console.log("Task Submitted:", TaskObj);
-       addTasks(TaskObj);
+    const updated = [...todos, TaskObj];
+    dispatch(addTodo(TaskObj));
+     AsyncStorage.setItem("TasksList", JSON.stringify(updated));
        setTaskTitle('');
          setTaskDescription('');
+
+        
     }
 }
 
